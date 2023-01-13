@@ -1,0 +1,24 @@
+{
+  "name": "beyond88/directia",
+  "description": "Directia is a professional, powerful, flexible, high quality directory plugin, you can create any kind of directory site.",
+  "license": "GPLv2",
+  "autoload": {
+    "classmap": [
+      "includes"
+    ],
+    "psr-4": {
+      "Directia\\": "includes/"
+    },
+    "files": [
+      "includes/functions.php"
+    ]
+  },
+  "authors": [
+    {
+      "name": "Mohiuddin Abdul Kader",
+      "email": "muhin.cse.diu@gmail.com"
+    }
+  ],
+  "minimum-stability": "dev",
+  "require": {}
+}
