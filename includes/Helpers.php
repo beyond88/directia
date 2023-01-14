@@ -1,6 +1,6 @@
 <?php
 
-namespace Directia;
+namespace Root\Directia;
 
 class Helpers 
 {

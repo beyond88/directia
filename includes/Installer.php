@@ -1,6 +1,6 @@
 <?php
 
-namespace Directia;
+namespace Root\Directia;
 
 /**
  * Installer class
@@ -13,14 +13,14 @@ class Installer {
      * @return void
      */
     public function run() {
-        $this->add_version();
-        $this->create_tables();
+        $this->addVersion();
+        $this->createTables();
     }
 
     /**
      * Add time and version on DB
      */
-    public function add_version() {
+    public function addVersion() {
         $installed = get_option( 'directia_installed' );
 
         if ( ! $installed ) {
@@ -35,7 +35,7 @@ class Installer {
      *
      * @return void
      */
-    public function create_tables() {
+    public function createTables() {
         global $wpdb;
         // set the default character set and collation for the table
         $charset_collate = $wpdb->get_charset_collate();
@@ -44,7 +44,7 @@ class Installer {
         $sql = "CREATE TABLE IF NOT EXISTS `{$wpdb->base_prefix}directia` (
                     id bigint(50) NOT NULL AUTO_INCREMENT,
                     title TEXT,
-                    content_type LONGTEXT,
+                    content LONGTEXT,
                     author int(5),
                     attachment_id bigint(50),
                     created_at datetime NOT NULL,

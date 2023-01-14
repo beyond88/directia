@@ -1,13 +1,11 @@
 {
-  "name": "beyond88/directia",
-  "description": "Directia is a professional, powerful, flexible, high quality directory plugin, you can create any kind of directory site.",
-  "license": "GPLv2",
+  "name": "root/directia",
   "autoload": {
     "classmap": [
       "includes"
     ],
     "psr-4": {
-      "Directia\\": "includes/"
+      "Root\\Directia\\": "includes/"
     },
     "files": [
       "includes/functions.php"

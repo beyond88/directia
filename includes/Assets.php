@@ -1,6 +1,6 @@
 <?php
 
-namespace Directia;
+namespace Root\Directia;
 
 /**
  * Assets handlers class
@@ -11,8 +11,8 @@ class Assets {
      * Class constructor
      */
     function __construct() {
-        add_action( 'wp_enqueue_scripts', [ $this, 'register_assets' ] );
-        add_action( 'admin_enqueue_scripts', [ $this, 'register_assets' ] );
+        add_action( 'wp_enqueue_scripts', [ $this, 'registerAssets' ] );
+        add_action( 'admin_enqueue_scripts', [ $this, 'registerAssets' ] );
     }
 
     /**
@@ -20,26 +20,26 @@ class Assets {
      *
      * @return array
      */
-    public function get_scripts() {
+    public function getScripts() {
         return [
             'directia-script' => [
-                'src'     => WOOTRIPLETEX_ASSETS . '/js/frontend.js',
-                'version' => filemtime( WOOTRIPLETEX_PATH . '/assets/js/frontend.js' ),
+                'src'     => DIRECTIA_ASSETS . '/js/frontend.js',
+                'version' => filemtime( DIRECTIA_PATH . '/assets/js/frontend.js' ),
                 'deps'    => [ 'jquery' ]
             ],
             // 'directia-moment' => [
-            //     'src'     => WOOTRIPLETEX_ASSETS . '/js/moment.min.js',
-            //     'version' => filemtime( WOOTRIPLETEX_PATH . '/assets/js/moment.min.js' ),
+            //     'src'     => DIRECTIA_ASSETS . '/js/moment.min.js',
+            //     'version' => filemtime( DIRECTIA_PATH . '/assets/js/moment.min.js' ),
             //     'deps'    => [ 'jquery' ]
             // ],    
             // 'directia-daterangepicker' => [
-            //     'src'     => WOOTRIPLETEX_ASSETS . '/js/daterangepicker.js',
-            //     'version' => filemtime( WOOTRIPLETEX_PATH . '/assets/js/daterangepicker.js' ),
+            //     'src'     => DIRECTIA_ASSETS . '/js/daterangepicker.js',
+            //     'version' => filemtime( DIRECTIA_PATH . '/assets/js/daterangepicker.js' ),
             //     'deps'    => []
             // ],
             'directia-admin-script' => [
-                'src'     => WOOTRIPLETEX_ASSETS . '/js/admin.js',
-                'version' => filemtime( WOOTRIPLETEX_PATH . '/assets/js/admin.js' ),
+                'src'     => DIRECTIA_ASSETS . '/js/admin.js',
+                'version' => filemtime( DIRECTIA_PATH . '/assets/js/admin.js' ),
                 'deps'    => [ 'jquery', 'wp-util' ]
             ],
         
@@ -52,19 +52,19 @@ class Assets {
      *
      * @return array
      */
-    public function get_styles() {
+    public function getStyles() {
         return [
             'directia-style' => [
-                'src'     => WOOTRIPLETEX_ASSETS . '/css/frontend.css',
-                'version' => filemtime( WOOTRIPLETEX_PATH . '/assets/css/frontend.css' )
+                'src'     => DIRECTIA_ASSETS . '/css/frontend.css',
+                'version' => filemtime( DIRECTIA_PATH . '/assets/css/frontend.css' )
             ],
             'directia-admin-style' => [
-                'src'     => WOOTRIPLETEX_ASSETS . '/css/admin.css',
-                'version' => filemtime( WOOTRIPLETEX_PATH . '/assets/css/admin.css' )
+                'src'     => DIRECTIA_ASSETS . '/css/admin.css',
+                'version' => filemtime( DIRECTIA_PATH . '/assets/css/admin.css' )
             ],
             // 'directia-daterangepicker' => [
-            //     'src'     => WOOTRIPLETEX_ASSETS . '/css/daterangepicker.css',
-            //     'version' => filemtime( WOOTRIPLETEX_PATH . '/assets/css/daterangepicker.css' )
+            //     'src'     => DIRECTIA_ASSETS . '/css/daterangepicker.css',
+            //     'version' => filemtime( DIRECTIA_PATH . '/assets/css/daterangepicker.css' )
             // ],
         ];
     }
@@ -74,9 +74,9 @@ class Assets {
      *
      * @return void
      */
-    public function register_assets() {
-        $scripts = $this->get_scripts();
-        $styles  = $this->get_styles();
+    public function registerAssets() {
+        $scripts = $this->getScripts();
+        $styles  = $this->getStyles();
 
         foreach ( $scripts as $handle => $script ) {
             $deps = isset( $script['deps'] ) ? $script['deps'] : false;

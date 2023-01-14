@@ -1,6 +1,6 @@
 <?php
 
-namespace directia;
+namespace Root\Directia;
 
 /**
  * Frontend handler class

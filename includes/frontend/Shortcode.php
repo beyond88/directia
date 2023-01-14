@@ -1,6 +1,6 @@
 <?php
 
-namespace Directia\Frontend;
+namespace Root\Directia\Frontend;
 
 /**
  * Shortcode handler class
@@ -11,7 +11,7 @@ class Shortcode {
      * Initializes the class
      */
     function __construct() {
-        add_shortcode( 'directia', [ $this, 'render_shortcode' ] );
+        add_shortcode( 'directia', [ $this, 'renderShortcode' ] );
     }
 
     /**
@@ -22,7 +22,7 @@ class Shortcode {
      *
      * @return string
      */
-    public function render_shortcode( $atts, $content = '' ) {
+    public function renderShortcode( $atts, $content = '' ) {
         wp_enqueue_script( 'directia-script' );
         wp_enqueue_style( 'directia-style' );
 

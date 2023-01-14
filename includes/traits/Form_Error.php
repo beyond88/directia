@@ -1,6 +1,6 @@
 <?php
 
-namespace Directia\Traits;
+namespace Root\Directia\Traits;
 
 /**
  * Error handler trait

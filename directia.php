@@ -82,19 +82,19 @@ final class Directia {
      * @return void
      */
     public function init_plugin() {
-        new Directia\Assets();
+        new Root\Directia\Assets();
 
         if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
-            new Directia\Ajax();
+            new Root\Directia\Ajax();
         }
 
         if ( is_admin() ) {
-            new Directia\Admin();
+            new Root\Directia\Admin();
         } else {
-            new Directia\Frontend();
+            new Root\Directia\Frontend();
         }
 
-        new Directia\API();
+        new Root\Directia\API();
     }
 
     /**
@@ -103,7 +103,7 @@ final class Directia {
      * @return void
      */
     public function activate() {
-        $installer = new Directia\Installer();
+        $installer = new Root\Directia\Installer();
         $installer->run();
     }
 }

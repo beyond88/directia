@@ -1,6 +1,6 @@
 <?php
 
-namespace Directia;
+namespace Root\Directia;
 
 /**
  * The admin class
@@ -18,7 +18,7 @@ class Admin {
      *
      * @return void
      */
-    public function dispatch_actions( $main ) {
+    public function dispatchActions( $main ) {
 
     }
 }
