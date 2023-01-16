@@ -11,6 +11,8 @@ class Admin {
      * Initialize the class
      */
     function __construct() {
+        new Admin\Menu();
+        new Admin\PluginMeta();
     }
 
     /**
@@ -18,7 +20,7 @@ class Admin {
      *
      * @return void
      */
-    public function dispatchActions( $main ) {
+    public function dispatchActions() {
 
     }
 }

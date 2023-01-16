@@ -74,6 +74,7 @@ final class Directia {
         define( 'DIRECTIA_PATH', __DIR__ );
         define( 'DIRECTIA_URL', plugins_url( '', DIRECTIA_FILE ) );
         define( 'DIRECTIA_ASSETS', DIRECTIA_URL . '/assets' );
+        define( 'DIRECTIA_BASENAME', plugin_basename( __FILE__ ) );
     }
 
     /**
