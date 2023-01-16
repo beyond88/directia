@@ -2,7 +2,7 @@
 
 namespace Root\Directia\Admin;
 
-class PluginMeta 
+class PluginMeta
 {
 
     public function __construct()

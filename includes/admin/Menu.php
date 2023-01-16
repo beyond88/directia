@@ -23,12 +23,32 @@ class Menu
      */
     public function adminMenu() 
     {
+
         $parentslug = 'directia';
         $capability = 'manage_options';
         $iconUrl = 'dashicons-analytics';
 
-        $hook = add_menu_page( __( 'Listings', 'directia' ), __( 'Listings', 'directia' ), $capability, $parentslug, [ $this, 'pluginPage' ], $iconUrl, 50 );
+        $hook = add_menu_page( __( 'Directia', 'directia' ), __( 'Directia', 'directia' ), $capability, $parentslug, [ $this, 'pluginPage' ], $iconUrl, 50 );
         add_action( 'admin_head-' . $hook, [ $this, 'enqueueAssets' ] );
+        add_action( "load-".$hook, [ $this, 'addOptions' ] ); 
+
+    }
+
+    /**
+     * Add option to control per page item
+     *
+     * @return void
+     */
+    function addOptions() {
+
+        $option = 'per_page';
+        $args = array(
+            'label' => 'Results',
+            'default' => 10,
+            'option' => 'results_per_page'
+        );
+        add_screen_option( $option, $args );
+
     }
 
     /**
@@ -38,7 +58,6 @@ class Menu
      */
     public function enqueueAssets() 
     {
-        wp_enqueue_style( 'directia-admin-boostrap' );
         wp_enqueue_style( 'directia-admin-style' );
         wp_enqueue_script( 'directia-admin-script' );
     }
@@ -48,8 +67,14 @@ class Menu
      *
      * @return void
      */
-    public function pluginPage(){
-        echo 'Hello world';
+    public function pluginPage() {
+        
+        $listing = new DirectoryListings();
+        $template = __DIR__ . '/views/listings.php';
+
+        if ( file_exists( $template ) ) {
+            include $template;
+        }
     }
 
 

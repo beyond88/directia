@@ -48,7 +48,7 @@ class Installer {
                     author int(5),
                     attachment_id bigint(50),
                     created_at datetime NOT NULL,
-                    updated_at datetime NOT NULL,
+                    updated_at datetime NULL,
                     PRIMARY KEY (id)
                 ) $charset_collate;";
         require_once ABSPATH . 'wp-admin/includes/upgrade.php';
