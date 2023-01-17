@@ -3,7 +3,7 @@
         <?php echo __( 'Listings', 'directia' ); ?>
 	</h2>
 
-	<form class="" method="post">
+	<form class="" method="get">
 		<?php
 			if(! isset($listing)) { return; }
 			$listing->process_bulk_action();

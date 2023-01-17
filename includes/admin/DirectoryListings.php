@@ -337,6 +337,98 @@ class DirectoryListings extends \WP_List_Table {
 
     }
 
+    /**
+     * @return object
+     */
+    public function get_listings_count()
+    {
+        global $wpdb;
+        $table = $wpdb->prefix . 'directia';
+        $totals = (array) $wpdb->get_results("SELECT status, COUNT( * ) AS total FROM {$table} GROUP BY status", ARRAY_A );
+
+        $listing_count = array(
+            'all'               => 0,
+            'trash'           => 0,
+        );
+
+        foreach ( $totals as $row ) {
+            switch ( $row['status'] ) {
+                case 'all':
+                    $listing_count['all']        = $row['total'];
+                    $listing_count['all']        += $row['total'];
+                    break;                  
+                case 'trash':
+                    $listing_count['trash']        = $row['total'];
+                    $listing_count['all']          += $row['total'];
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        return (object) $listing_count;
+    }
+
+    /**
+     * @global int $post_id
+     * @global string $comment_status
+     * @global string $comment_type
+     */
+    protected function get_views()
+    {
+        global $post_id, $listing_status;
+
+        $status_links = array();
+        $num_comments = $this->get_listings_count();
+        $stati = array(
+            /* translators: %s: Number of comments. */
+            'all'       => _nx_noop(
+                'All <span class="count">(%s)</span>',
+                'All <span class="count">(%s)</span>',
+                'comments',
+                'directia'
+            ), // Singular not used.
+
+            /* translators: %s: Number of comments. */
+            'trash' => _nx_noop(
+                'Trash <span class="count">(%s)</span>',
+                'Trash <span class="count">(%s)</span>',
+                'comments',
+                'directia'
+            )
+        );
+
+        $link = admin_url('admin.php?page=directia');
+
+        if ( ! empty( $listing_status ) && 'all' != $listing_status ) {
+            $link = add_query_arg( 'listing_status', $listing_status, $link );
+        }
+
+        foreach ( $stati as $status => $label ) {
+            $current_link_attributes = '';
+
+            if ( $status === $listing_status ) {
+                $current_link_attributes = ' class="current" aria-current="page"';
+            }
+
+            $link = add_query_arg( 'listing_status', $status, $link );
+            if ( $post_id ) {
+                $link = add_query_arg( 'p', absint( $post_id ), $link );
+            }
+
+            $status_links[ $status ] = "<a href='$link'$current_link_attributes>" . sprintf(
+                    translate_nooped_plural( $label, $num_comments->$status ),
+                    sprintf(
+                        '<span class="%s-count">%s</span>',
+                        ( 'moderated' === $status ) ? 'pending' : $status,
+                        number_format_i18n( $num_comments->$status )
+                    )
+                ) . '</a>';
+        }
+
+        return apply_filters( 'listing_status_links', $status_links );
+    }
+
 
 }
 endif; 
