@@ -89,12 +89,8 @@ final class Directia {
             new Root\Directia\Ajax();
         }
 
-        if ( is_admin() ) {
-            new Root\Directia\Admin();
-        } else {
-            new Root\Directia\Frontend();
-        }
-
+        new Root\Directia\Admin();
+        new Root\Directia\Frontend();
         new Root\Directia\API();
     }
 

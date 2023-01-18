@@ -9,7 +9,7 @@ if ( ! class_exists( 'WP_List_Table' ) ) {
 /**
  * Directory Listings Class to extend WP_List_Table
  */
-if ( ! class_exists( 'Directory_Listings' ) ) :
+if ( ! class_exists( 'DirectoryListings' ) ) :
 class DirectoryListings extends \WP_List_Table {
 
 

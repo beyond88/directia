@@ -27,16 +27,6 @@ class Assets {
                 'version' => filemtime( DIRECTIA_PATH . '/assets/js/frontend.js' ),
                 'deps'    => [ 'jquery' ]
             ],
-            // 'directia-moment' => [
-            //     'src'     => DIRECTIA_ASSETS . '/js/moment.min.js',
-            //     'version' => filemtime( DIRECTIA_PATH . '/assets/js/moment.min.js' ),
-            //     'deps'    => [ 'jquery' ]
-            // ],    
-            // 'directia-daterangepicker' => [
-            //     'src'     => DIRECTIA_ASSETS . '/js/daterangepicker.js',
-            //     'version' => filemtime( DIRECTIA_PATH . '/assets/js/daterangepicker.js' ),
-            //     'deps'    => []
-            // ],
             'directia-admin-script' => [
                 'src'     => DIRECTIA_ASSETS . '/js/admin.js',
                 'version' => filemtime( DIRECTIA_PATH . '/assets/js/admin.js' ),
@@ -62,10 +52,6 @@ class Assets {
                 'src'     => DIRECTIA_ASSETS . '/css/admin.css',
                 'version' => filemtime( DIRECTIA_PATH . '/assets/css/admin.css' )
             ],
-            // 'directia-daterangepicker' => [
-            //     'src'     => DIRECTIA_ASSETS . '/css/daterangepicker.css',
-            //     'version' => filemtime( DIRECTIA_PATH . '/assets/css/daterangepicker.css' )
-            // ],
         ];
     }
 
@@ -90,10 +76,9 @@ class Assets {
             wp_enqueue_style( $handle, $style['src'], $deps, $style['version'] );
         }
 
-        wp_localize_script( 'directia-admin-script', 'directia', [
+        wp_localize_script( 'directia-script', 'directia', [
             'ajax_url' => admin_url('admin-ajax.php'),
-            'nonce' => wp_create_nonce( 'directia-admin-nonce' ),
-            'confirm' => __( 'Are you sure?', 'directia' ),
+            'nonce' => wp_create_nonce( 'directia-nonce' ),
             'error' => __( 'Something went wrong', 'directia' )
         ] );
     }

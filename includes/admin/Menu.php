@@ -73,8 +73,10 @@ class Menu
         $template = __DIR__ . '/views/listings.php';
 
         if ( file_exists( $template ) ) {
-            include $template;
+            return include $template;
         }
+
+        return '';
     }
 
 

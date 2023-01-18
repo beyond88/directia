@@ -1,18 +1,12 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Poppins", sans-serif;
-}
-/* body{
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 10px;
-  background: linear-gradient(135deg, #71b7e6, #9b59b6);
-} */
+/*!***************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/style.scss ***!
+  \***************************************************************************************************************************************************************************************************************************************/
+/**
+ * The following styles get applied both on the front of your site
+ * and in the editor.
+ *
+ * Replace them with your own styles or remove the file completely.
+ */
 .directia-form {
   max-width: 700px;
   width: 100%;
@@ -21,11 +15,13 @@
   border-radius: 5px;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
 }
+
 .directia-form-container .directia-form-title {
   font-size: 25px;
   font-weight: 500;
   position: relative;
 }
+
 .directia-form-container .directia-form-title::before {
   content: "";
   position: absolute;
@@ -36,15 +32,17 @@
   border-radius: 5px;
   background: linear-gradient(135deg, #71b7e6, #9b59b6);
 }
+
 .directia-form-content form .directia-form-user-details {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   margin: 20px 0 12px 0;
 }
+
 form .directia-form-user-details .directia-form-input-box {
   margin-bottom: 15px;
-  width: calc(100% / 2 - 20px);
+  width: calc(50% - 20px);
 }
 
 form .directia-form-user-details .directia-form-input-box-full {
@@ -56,6 +54,7 @@ form .directia-form-input-box span.directia-form-details {
   font-weight: 500;
   margin-bottom: 5px;
 }
+
 .directia-form-user-details .directia-form-input-box input {
   height: 45px;
   width: 100%;
@@ -67,25 +66,30 @@ form .directia-form-input-box span.directia-form-details {
   border-bottom-width: 2px;
   transition: all 0.3s ease;
 }
+
 .directia-form-user-details .directia-form-input-box input:focus,
 .directia-form-user-details .directia-form-input-box input:valid {
   border-color: #9b59b6;
 }
+
 form .directia-form-gender-details .directia-form-gender-title {
   font-size: 20px;
   font-weight: 500;
 }
+
 form .directia-form-category {
   display: flex;
   width: 80%;
   margin: 14px 0;
   justify-content: space-between;
 }
+
 form .directia-form-category label {
   display: flex;
   align-items: center;
   cursor: pointer;
 }
+
 form .directia-form-category label .directia-form-dot {
   height: 18px;
   width: 18px;
@@ -95,19 +99,23 @@ form .directia-form-category label .directia-form-dot {
   border: 5px solid transparent;
   transition: all 0.3s ease;
 }
+
 #dot-1:checked ~ .directia-form-category label .directia-form-one,
 #dot-2:checked ~ .directia-form-category label .directia-form-two,
 #dot-3:checked ~ .directia-form-category label .directia-form-three {
   background: #9b59b6;
   border-color: #d9d9d9;
 }
-form input[type="radio"] {
+
+form input[type=radio] {
   display: none;
 }
+
 form .directia-form-button {
   height: 45px;
   margin: 35px 0;
 }
+
 form .directia-form-button input {
   height: 100%;
   width: 100%;
@@ -121,10 +129,12 @@ form .directia-form-button input {
   transition: all 0.3s ease;
   background: linear-gradient(135deg, #71b7e6, #9b59b6);
 }
+
 form .directia-form-button input:hover {
   /* transform: scale(0.99); */
   background: linear-gradient(-135deg, #71b7e6, #9b59b6);
 }
+
 @media (max-width: 584px) {
   .directia-form-container {
     max-width: 100%;
@@ -149,3 +159,35 @@ form .directia-form-button input:hover {
     flex-direction: column;
   }
 }
+.directia-form-container input[type=text],
+.directia-form-container input[type=password],
+.directia-form-container input[type=email],
+input[type=url],
+.directia-form-container input[type=date],
+input[type=month],
+.directia-form-container input[type=time],
+input[type=datetime],
+.directia-form-container input[type=datetime-local],
+.directia-form-container input[type=week],
+.directia-form-container input[type=number],
+.directia-form-container input[type=search],
+.directia-form-container input[type=tel],
+.directia-form-container input[type=color],
+.directia-form-container textarea {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background: #fff;
+  border-radius: 0;
+  border-style: solid;
+  border-width: 0.1rem;
+  box-shadow: none;
+  display: block;
+  font-size: 12px;
+  letter-spacing: -0.015em;
+  margin: 0;
+  max-width: 100%;
+  padding: 5px;
+  width: 100%;
+}
+
+/*# sourceMappingURL=style-index.css.map*/
