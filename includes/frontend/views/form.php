@@ -10,9 +10,8 @@
           </div>
           <div class="directia-form-input-box-full">
             <span class="directia-form-details"><?php echo __('Content', 'directia'); ?></span>
-            <!-- <textarea id="listing-content" class="listing-content" name="listing-content" cols="5" rows="5"></textarea> -->
             <?php 
-              $settings = array( 'textarea_name' => 'listing-content' );
+              $settings = array( 'textarea_name' => 'listing-content', 'media_buttons' => false, 'drag_drop_upload' => false );
               wp_editor( $content, 'listing-content', $settings );
             ?>
           </div>
@@ -22,7 +21,7 @@
           </div>
           <div class="directia-form-input-box">
             <span class="directia-form-details"><?php echo __('Image', 'directia'); ?></span>
-            <input type="file" name="listing-image" id="listing-image" class="listing-image" accept="image/png, image/gif, image/jpeg"/>
+            <input type="file" name="file" id="listing-image" class="listing-image" accept="image/png, image/gif, image/jpeg"/>
           </div>
         </div>
         <div class="directia-form-button">

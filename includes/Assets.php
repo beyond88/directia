@@ -78,10 +78,13 @@ class Assets {
 
         wp_localize_script( 'directia-script', 'directia', [
             'ajax_url' => admin_url('admin-ajax.php'),
-            'nonce' => wp_create_nonce( 'directia-nonce' ),
+            'nonce' => wp_create_nonce( 'wp_rest' ),
             'error' => __( 'Something went wrong', 'directia' ),
             'user_id' => get_current_user_id(),
             'field_required' => __( 'All field is required!', 'directia' ),
+            'site_url' => site_url('/').'wp-json',
+            'button_text' => __( 'Submit', 'directia' ),
+            'request_text' => __( 'Processing', 'directia' ),
         ] );
     }
 }

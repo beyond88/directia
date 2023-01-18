@@ -28,38 +28,56 @@
     })
 
     $(document).on('click', '#listing-submit', function(){
-        
-        let title = $("#").val();
-        let content = $("#listing-content").val();
 
-        if( title == '' || content == '' || $('#listing-image').get(0).files.length === 0){
-            $('#directia-field-required').html(directia.field_required);;
+        let that = $(this);
+        
+        let title = $("#listing-title").val();
+        let content = tinymce.get( $("#listing-content").attr( 'id' ) ).getContent( { format: 'text' } );
+
+        if( title == '' || $('#listing-image').get(0).files.length === 0){
+            $('.directia-field-required').text(directia.field_required);
         } else {
             var fd = new FormData();
             fd.append( "listing_title", title );
             fd.append( "listing_content", content );
+            fd.append( "listing_user", directia.user_id );
             fd.append( "listing_image", $('#listing-image')[0].files[0]);
+
+
+            that.prop('disabled', true);
+            that.val(directia.request_text);
 
             jQuery.ajax({
                 type: 'POST',
-                url: apfajax.ajaxurl,
+                url: directia.site_url + '/directia-api/v1/create-listing',
                 data: fd, 
                 processData: false,
                 contentType: false,
-                success: function(data, textStatus, XMLHttpRequest) {
-                    var id = '#apf-response';
-                    jQuery(id).html('');
-                    jQuery(id).append(data);
+                beforeSend: function(xhr) {
+                    xhr.setRequestHeader( 'X-WP-Nonce', directia.nonce );
                 },
-        
+                success: function(data, textStatus, XMLHttpRequest) {
+                    console.log('res==>', data);
+
+                    if(data.status == 'success'){
+                        that.val(directia.button_text);
+                        alert(data.msg);
+                        window.location.reload();
+                    } else {
+                        that.val(directia.button_text);
+                        that.prop('disabled', false);
+                        $('.directia-field-required').text(data.msg);
+                    }
+
+                },
                 error: function(MLHttpRequest, textStatus, errorThrown) {
-                    alert(errorThrown);
+                    that.val(directia.button_text);
+                    that.prop('disabled', false);
+                    $('.directia-field-required').text(directia.error);
                 }
 
             });
         }
-
-        console.log('hello')
     })
 
 })(jQuery);
