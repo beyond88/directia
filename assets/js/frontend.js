@@ -10,7 +10,6 @@
 
     $(document).on('change', '#listing-image', function(event){
 
-
         const size = 
             (this.files[0].size / 1024 / 1024).toFixed(2);
         
@@ -79,5 +78,60 @@
             });
         }
     })
+
+    /*************************
+     * 
+     * Login
+     * 
+     **************************/
+    
+    $(document).on('click', '#listing-login', function(){
+
+        let that = $(this);
+
+        let username = $("#listing-username").val();
+        let password = $("#listing-password").val();
+        if( username == '' || password == ''){
+            $('.directia-field-required').text(directia.field_required);
+        } else {
+            that.prop('disabled', true);
+            that.val(directia.request_text);
+
+            let data = {
+                username: username,
+                password: password
+            }
+
+            jQuery.ajax({
+                type: 'POST',
+                url: directia.site_url + '/directia-api/v1/login',
+                data: data,
+                beforeSend: function(xhr) {
+                    xhr.setRequestHeader( 'X-WP-Nonce', directia.nonce );
+                },
+                success: function(response, textStatus, XMLHttpRequest) {
+
+                    if (response.errorMessage) {
+                        alert(response.errorMessage);
+                     } else if (!response.isLoggedIn) {
+                        // Unknown error logging in.
+                     } else {
+                        // We've successfully logged-in.
+                        // Reload the current page.
+                        location.reload();
+                     }
+
+                },
+                error: function(MLHttpRequest, textStatus, errorThrown) {
+                    that.val(directia.login_text);
+                    that.prop('disabled', false);
+                    $('.directia-field-required').text(directia.error);
+                },
+                
+
+            });
+        }
+    });
+
 
 })(jQuery);

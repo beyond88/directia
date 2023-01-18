@@ -75,6 +75,8 @@ final class Directia {
         define( 'DIRECTIA_URL', plugins_url( '', DIRECTIA_FILE ) );
         define( 'DIRECTIA_ASSETS', DIRECTIA_URL . '/assets' );
         define( 'DIRECTIA_BASENAME', plugin_basename( __FILE__ ) );
+        define( 'DIRECTIA_LOGIN_RETRY_PAUSE', 5 ); // secs
+
     }
 
     /**

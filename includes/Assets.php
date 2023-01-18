@@ -85,6 +85,7 @@ class Assets {
             'site_url' => site_url('/').'wp-json',
             'button_text' => __( 'Submit', 'directia' ),
             'request_text' => __( 'Processing', 'directia' ),
+            'login_text' => __( 'Login', 'directia' ),
         ] );
     }
 }

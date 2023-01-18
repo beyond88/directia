@@ -10,6 +10,7 @@ class API {
     public function __construct() {
 
         new API\Listings();
+        new API\Authentication();
 
     }
 }
