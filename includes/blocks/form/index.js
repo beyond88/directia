@@ -23,9 +23,6 @@ __webpack_require__.r(__webpack_exports__);
  * @see https://developer.wordpress.org/block-editor/reference-guides/block-api/block-registration/
  */
 
-
-
-
 const blockAttributes = {};
 const directiaListingFormIcon = (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("svg", {
   width: "20",
@@ -91,7 +88,8 @@ const buildShortcode = function (attributes) {
     }, /*#__PURE__*/React.createElement("form", {
       action: "#",
       method: "post",
-      enctype: "multipart/form-data"
+      enctype: "multipart/form-data",
+      id: "add-listing-form"
     }, /*#__PURE__*/React.createElement("div", {
       class: "directia-form-user-details"
     }, /*#__PURE__*/React.createElement("div", {
@@ -122,10 +120,15 @@ const buildShortcode = function (attributes) {
       type: "file",
       name: "listing-image",
       id: "listing-image",
-      class: "listing-image"
+      class: "listing-image",
+      accept: "image/png, image/gif, image/jpeg"
     }))), /*#__PURE__*/React.createElement("div", {
       class: "directia-form-button"
-    }, /*#__PURE__*/React.createElement("input", {
+    }, 
+      /*#__PURE__*/React.createElement("span", {
+        class: "directia-field-required"
+      }),
+      /*#__PURE__*/React.createElement("input", {
       type: "button",
       name: "listing-submit",
       id: "listing-submit",

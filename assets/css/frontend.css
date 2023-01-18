@@ -49,6 +49,8 @@ form .directia-form-user-details .directia-form-input-box {
 
 form .directia-form-user-details .directia-form-input-box-full {
   width: 100% !important;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 form .directia-form-input-box span.directia-form-details {
@@ -148,4 +150,8 @@ form .directia-form-button input:hover {
   .directia-form-container .directia-form-content .directia-form-category {
     flex-direction: column;
   }
+}
+
+.directia-field-required {
+  color: mediumvioletred;
 }
