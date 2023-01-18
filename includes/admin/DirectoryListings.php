@@ -135,13 +135,18 @@ class DirectoryListings extends \WP_List_Table {
             case 'title':
                     return esc_html( $item['title'] );
             case 'content':
-                return esc_html( $item['content'] );
+                return esc_html( wp_trim_words( $item['content'], 5) );
             case 'author':
-                return esc_html( $item['author'] );
+                return $this->get_user_name( $item['author'] )->user_login;
             case 'date':
                 return esc_html( $item['created_at'] );
             return 'Unknown';
         }
+    }
+
+    protected function get_user_name( $user_id ){
+        $user = get_user_by( 'id', $user_id );
+        return $user;
     }
 
     /**
@@ -247,89 +252,7 @@ class DirectoryListings extends \WP_List_Table {
             $trashed    = 0;
             $untrashed  = 0;
             $deleted    = 0;
-            $redirect_to = remove_query_arg( array( 'trashed', 'untrashed', 'deleted', 'spammed', 'unspammed', 'approved', 'unapproved', 'ids' ), wp_get_referer() );
-
-            wp_defer_comment_counting( true );
-
-            foreach ( $comment_ids as $comment_id ) { // Check the permissions on each.
-                if ( ! current_user_can( 'edit_comment', $comment_id ) ) {
-                    continue;
-                }
-
-                switch ( $doaction ) {
-                    case 'approve':
-                        wp_set_comment_status( $comment_id, 'approve' );
-                        $this->add_rating_into_total_rating_data($comment_id);
-                        $approved++;
-                        break;
-                    case 'unapprove':
-                        $this->deduct_rating_by_previous_comment_status($comment_id, $doaction);
-                        wp_set_comment_status( $comment_id, 'hold' );
-                        $unapproved++;
-                        break;
-                    case 'spam':
-                        $this->deduct_rating_by_previous_comment_status($comment_id, $doaction);
-                        wp_spam_comment( $comment_id );
-                        $spammed++;
-                        break;
-                    case 'unspam':
-                        $this->deduct_rating_by_previous_comment_status($comment_id, $doaction);
-                        wp_unspam_comment( $comment_id );
-                        $unspammed++;
-                        break;
-                    case 'trash':
-                        $this->deduct_rating_by_previous_comment_status($comment_id, $doaction);
-                        wp_trash_comment( $comment_id );
-                        $trashed++;
-                        break;
-                    case 'untrash':
-                        $this->deduct_rating_by_previous_comment_status($comment_id, $doaction);
-                        wp_untrash_comment( $comment_id );
-                        $untrashed++;
-                        break;
-                    case 'delete':
-                        $this->deduct_rating_by_previous_comment_status($comment_id, $doaction);
-                        CriteriaController::removeCriteria($comment_id);
-                        Gatekeeper::removeLog($comment_id);
-                        wp_delete_comment( $comment_id );
-                        $deleted++;
-                        break;
-                }
-            }
-
-            if ( ! in_array( $doaction, array( 'approve', 'unapprove', 'spam', 'unspam', 'trash', 'delete' ), true ) ) {
-                $screen = get_current_screen()->id;
-
-                /** This action is documented in wp-admin/edit.php */
-                $redirect_to = apply_filters( "handle_bulk_actions-{$screen}", $redirect_to, $doaction, $comment_ids ); // phpcs:ignore WordPress.NamingConventions.ValidHookName.UseUnderscores
-            }
-
-            wp_defer_comment_counting( false );
-
-            if ( $approved ) {
-                $redirect_to = add_query_arg( 'approved', $approved, $redirect_to );
-            }
-            if ( $unapproved ) {
-                $redirect_to = add_query_arg( 'unapproved', $unapproved, $redirect_to );
-            }
-            if ( $spammed ) {
-                $redirect_to = add_query_arg( 'spammed', $spammed, $redirect_to );
-            }
-            if ( $unspammed ) {
-                $redirect_to = add_query_arg( 'unspammed', $unspammed, $redirect_to );
-            }
-            if ( $trashed ) {
-                $redirect_to = add_query_arg( 'trashed', $trashed, $redirect_to );
-            }
-            if ( $untrashed ) {
-                $redirect_to = add_query_arg( 'untrashed', $untrashed, $redirect_to );
-            }
-            if ( $deleted ) {
-                $redirect_to = add_query_arg( 'deleted', $deleted, $redirect_to );
-            }
-            if ( $trashed || $spammed ) {
-                $redirect_to = add_query_arg( 'ids', join( ',', $comment_ids ), $redirect_to );
-            }
+            $redirect_to = remove_query_arg( array( 'trashed', 'untrashed', 'deleted', 'ids' ), wp_get_referer() );
 
             wp_safe_redirect( $redirect_to );
             exit;
