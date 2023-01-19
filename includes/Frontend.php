@@ -13,10 +13,11 @@ class Frontend {
      */
     function __construct() {
 
-        //new Frontend\ListingShortcode();
-
         new Frontend\FormShortcode();
         new Block\FormBlock();
-        
+
+        new Frontend\ListingShortcode();
+        new Block\ListingsBlock();
+
     }
 }

@@ -12,12 +12,18 @@ use WP_REST_Server;
 class Listings {
 
     private $restBase = 'directia-api/v1';
+    private $table;
+    
 
     /**
      * Initialize the class
      */
     function __construct() {
+
+        global $wpdb;
+        $this->table = $wpdb->prefix . 'directia';
        add_action( 'rest_api_init', [ $this, 'registerApi' ] );
+
     }
 
     /**
@@ -29,12 +35,14 @@ class Listings {
 
         register_rest_route( $this->restBase, '/listings', [
             'methods'  => WP_REST_SERVER::READABLE,
-            'callback' => [ $this, 'getListings' ]
+            'callback' => [ $this, 'getListings' ],
+            'permission_callback' => '__return_true'
         ]);
 
         register_rest_route( $this->restBase, '/create-listing', [
             'methods'  => WP_REST_SERVER::CREATABLE,
-            'callback' => [ $this, 'createListing' ]
+            'callback' => [ $this, 'createListing' ],
+            'permission_callback' => '__return_true'
         ]);
 
     }
@@ -46,11 +54,52 @@ class Listings {
      */
     public function getListings( WP_REST_Request $request ) {
 
-        $results = [];
+        global $wpdb; 
+        $listing = [];
+        $id = '';
+
+        // Request the data send
+        $params = $request->get_params();
+        if( isset($params['id']) ) {
+
+            $id = $params['id'];
+            $sql = $wpdb->prepare( "SELECT * FROM $this->table WHERE id =%d ORDER BY id DESC", $id);
+            $listing = $wpdb->get_results( $sql, ARRAY_A );
+
+        } else {
+
+            $sql = $wpdb->prepare( "SELECT * FROM $this->table ORDER BY id DESC");
+            $listing = $wpdb->get_results( $sql, ARRAY_A );
+
+        }
+
+        if( ! empty($listing) ){
+            foreach( $listing as $key => $item ){
+
+                if(isset($item['author']) ){
+                    $author = $item['author'];
+                    $user = get_user_by( 'id', $author );
+                    $listing[$key]['author'] = $user->user_login;
+                }
+
+                if(isset($item['attachment_id']) ){
+                    $attachment_id = $item['attachment_id'];
+
+                    $image = wp_get_attachment_image_src($attachment_id, 'thumbnail');
+                    $img_src = '';
+                    if( is_array($image) ){
+                        $img_src = $image[0];
+                        $listing[$key]['attachment_id'] = $img_src;
+                    }
+                }
+
+            }
+        }
+
         return new \WP_REST_Response(
             [
                 'success' => true,
-                'data' => $results,
+                'data' => $listing,
             ],
             200
         );
@@ -64,7 +113,7 @@ class Listings {
     public function createListing( WP_REST_Request $request ) {
 
         global $wpdb;
-        $table = $wpdb->prefix . 'directia';
+        $table = $this->table;
         // Prepare array for output
         $msg = [];
 

@@ -16,3 +16,9 @@ add_filter( 'block_categories_all' , function( $categories ) {
 	return $categories;
 } );
 
+add_filter( 'rest_url', 'my_remove_locale_query_string', PHP_INT_MAX, 2 );
+function my_remove_locale_query_string( $url, $path ) {
+    // $url = remove_query_arg( '_locale', $url );
+	$url = str_replace('?_locale=user','', $url);
+    return $url;
+}

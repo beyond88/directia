@@ -7,30 +7,66 @@ namespace Root\Directia\Block;
  */
 class ListingsBlock {
 
-    // public function __construct( $core ) {
-	// 	if ( function_exists( 'register_block_type' ) ) {
-	// 		$this->backend_editor();
-	// 	}
-	// }
+    public function __construct() {
+		add_action( 'init', [$this, 'directiaListingBlockInit'] );
+	}
 
-	// function backend_editor() {
-	// 	$physical_file = MCFB_PATH . '/blocks/dist/index.js';
-	// 	$version = file_exists( $physical_file ) ? filemtime( $physical_file ) : MCFB_VERSION;
+	function directiaListingBlockInit() {
+		register_block_type( __DIR__,
+		array(
+			'render_callback' => [$this, 'renderBlock']
+		) );
+	}
 
-	// 	wp_register_style(
-	// 		'mcfb-css', MCFB_URL . 'css/contact-form-block.min.css',
-	// 		array( 'wp-edit-blocks' ), filemtime( MCFB_PATH . '/css/contact-form-block.min.css' )
-	// 	);
+	function renderBlock( $attributes ) {	
+		ob_start();
+		?>
+	  
+	  <div class="directia-cards">
+		<?php if( ! empty($attributes) && $attributes['data']['success'] == 1 ): ?>
+	
+		<?php 
+			$items = $attributes['data']['data'];
+			foreach( $items as $item ):
+				$page_url = site_url('/').'directia-listing-details?id='.$item['id'];	
+				$img_url = $item['attachment_id'];
+				$title = $item['title'];	
+				$created_at = $item['created_at'];
+				$author = $item['author'];	 
+		?>
+		<div class="directia-card">
+			<div class="directia-card-thumb">
+				<a href="<?php echo esc_url($page_url); ?> ">
+					<img width="270" height="200" src="<?php echo esc_url($img_url); ?>" class="rtcl-thumbnail" alt="" decoding="async" loading="lazy">
+				</a>
+			</div>
+			<div class="item-content" >
+				<div class="rtcl-listing-badge-wrap" >
+					<span class="badge rtcl-badge-popular popular-badge badge-success"><?php echo $author; ?></span>
+				</div>
+				<h3 class="item-title">
+					<a href="<?php echo esc_url($page_url); ?>"><?php echo $title; ?></a>
+				</h3>
+				<ul class="entry-meta">
+					<li class="">
+						<i class="fas fa-clock"></i> <?php echo $created_at; ?>
+					</li>
+				</ul>
+				<div class="item-price" >
+					<div class="rtcl-price price-type-on_call" >
+						<span class="rtcl-price-meta">
+							<span class="rtcl-price-type-label rtcl-on_call"><?php echo __('On call', 'directia'); ?></span>
+						</span>
+					</div>
+				</div>
+			</div>
+		</div>
+		<?php endforeach; ?>
+		<?php endif; ?>
+	</div>    
+	  
+		<?php return ob_get_clean();
+	}
 
-	// 	wp_register_script(
-	// 		'mcfb-js', MCFB_URL . 'blocks/dist/index.js',
-	// 		array( 'wp-editor', 'wp-i18n', 'wp-element' ), $version
-	// 	);
-	// 	register_block_type( 'contact-form-block/contact-form', array(
-	// 		'editor_script' => 'mcfb-js',
-	// 		'editor_style'  => 'mcfb-css'
-	// 	));
-
-	// }
 
 }

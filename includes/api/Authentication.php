@@ -29,7 +29,8 @@ class Authentication {
 
         register_rest_route( $this->restBase, '/login', [
             'methods'  => WP_REST_SERVER::CREATABLE,
-            'callback' => [ $this, 'tryLogin' ]
+            'callback' => [ $this, 'tryLogin' ],
+            'permission_callback' => '__return_true'
         ]);
 
     }

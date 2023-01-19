@@ -7,11 +7,48 @@ namespace Root\Directia\Frontend;
  */
 class ListingShortcode {
 
+    private $id;
+    private $table; 
+
     /**
      * Initializes the class
      */
     function __construct() {
+
+        global $wpdb;
+        $this->table = $wpdb->prefix . 'directia';
+
         add_shortcode( 'directia_listings', [ $this, 'directiaListings' ] );
+    }
+
+    /**
+     * Set id 
+     *
+     * @param  integer $atts
+     * @param  string $content
+     *
+     * @return string
+     */
+    function setId( $id ) {
+        return $this->id = $id;
+    }
+
+    /**
+     * 
+     * Get listing details by id
+     * 
+     *  @params integer
+     *  @return array
+     * 
+     */
+    public function getListing(){
+
+        global $wpdb; 
+        $sql = $wpdb->prepare( "SELECT * FROM $this->table ORDER BY id DESC");
+        $listing = $wpdb->get_results( $sql, ARRAY_A );
+
+        return $listing;
+
     }
 
     /**
@@ -29,6 +66,7 @@ class ListingShortcode {
         $atts = shortcode_atts([
         ], $atts);
 
+        $listing = $this->getListing();
         $template = __DIR__ . '/views/listings.php';
 
         if ( file_exists( $template ) ) {

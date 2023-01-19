@@ -155,3 +155,87 @@ form .directia-form-button input:hover {
 .directia-field-required {
   color: mediumvioletred;
 }
+
+.directia-card {
+  color: inherit;
+  padding: 1rem;
+  min-height: 4rem;
+  border-radius: 5px;
+  box-shadow: 0 5px 10px rgb(0 0 0 / 15%);
+}
+
+.directia-cards {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-gap: 1rem;
+}
+.directia-card-thumb {
+  margin-bottom: 0.75rem;
+}
+
+.directia-card-thumb a {
+  display: block;
+  overflow: hidden;
+  border-radius: 0.25rem 0.25rem 0 0;
+}
+
+.rtcl-listing-badge-wrap {
+  margin-bottom: 0.625rem;
+  line-height: 1.875rem;
+}
+
+.directia-card .item-content .rtcl-listing-badge-wrap span {
+  font-size: 0.7rem;
+  line-height: 1;
+  padding: 0.3125rem 0.5rem;
+  border-radius: 0.25rem;
+  margin-right: 0;
+  color: #fff;
+  background-color: #dd3333;
+}
+
+.directia-card .item-content .item-title {
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: #000000;
+  margin-bottom: 0.25rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  line-height: 1.875rem;
+  margin-bottom: 5px;
+}
+
+.directia-card .item-content .item-title a {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  text-decoration: none;
+  box-shadow: none;
+  color: #000000;
+}
+
+.directia-card ul.entry-meta {
+  list-style-type: none;
+  margin-left: 0;
+  font-size: 12px;
+}
+
+/* Screen larger than 600px? 2 column */
+@media (min-width: 600px) {
+  .directia-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Screen larger than 900px? 3 columns */
+@media (min-width: 900px) {
+  .directia-cards {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
