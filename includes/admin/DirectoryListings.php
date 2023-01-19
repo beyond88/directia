@@ -124,6 +124,21 @@ class DirectoryListings extends \WP_List_Table {
 
     }
 
+    private function getListingURL( $id ){
+        
+        if( $id ){
+            $site_url = site_url('/');
+            $page_slug = 'directia-listing';
+            $listing_id = '?listingId='.$id;
+            $url = $site_url.$page_slug.$listing_id;
+
+            return $url; 
+        }
+
+        return site_url('/');
+
+    }
+
     /**
     * Generates content for a single row of the table.
     *
@@ -133,7 +148,7 @@ class DirectoryListings extends \WP_List_Table {
     protected function column_default( $item, $column_name ) {
         switch ( $column_name ) {
             case 'title':
-                    return esc_html( $item['title'] );
+                    return '<a href="'.esc_url($this->getListingURL($item['id'])).'">'.esc_html( $item['title'] ).'</a>';
             case 'content':
                 return esc_html( wp_trim_words( $item['content'], 5) );
             case 'author':
