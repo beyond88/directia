@@ -127,15 +127,15 @@ class DirectoryListings extends \WP_List_Table {
     private function getListingURL( $id ){
         
         if( $id ){
-            $site_url = site_url('/');
-            $page_slug = 'directia-listing';
-            $listing_id = '?listingId='.$id;
+            $site_url = get_admin_url() . 'admin.php';
+            $page_slug = '?page=listing-details';
+            $listing_id = '&id='.$id;
             $url = $site_url.$page_slug.$listing_id;
 
             return $url; 
         }
 
-        return site_url('/');
+        return get_admin_url('admin.php');
 
     }
 
@@ -148,7 +148,7 @@ class DirectoryListings extends \WP_List_Table {
     protected function column_default( $item, $column_name ) {
         switch ( $column_name ) {
             case 'title':
-                    return '<a href="'.esc_url($this->getListingURL($item['id'])).'">'.esc_html( $item['title'] ).'</a>';
+                    return '<strong><a href="'.esc_url($this->getListingURL($item['id'])).'">'.esc_html( $item['title'] ).'</a></strong>';
             case 'content':
                 return esc_html( wp_trim_words( $item['content'], 5) );
             case 'author':

@@ -33,13 +33,12 @@
                     </div>
                     <!-- /titlediv -->
                     <div id="postdivrich" class="postarea wp-editor-expand">
-                        <div id="wp-content-wrap" class="wp-core-ui wp-editor-wrap tmce-active has-dfw" style="padding-top: 55px;">
-                            <textarea style="display:none" name="post_text" id="posttext" rows="3"><?php echo $content; ?></textarea>   
-                            <?php 
-                                $settings = array( 'textarea_name' => 'listing-content', 'media_buttons' => false, 'drag_drop_upload' => false );
-                                wp_editor( $content, 'posttext', $settings );
-                            ?>
-                        </div>
+                        
+                        <textarea style="display:none" name="post_text" id="posttext" rows="3"><?php echo $content; ?></textarea>   
+                        <?php 
+                            $settings = array( 'textarea_name' => 'post_text', 'media_buttons' => false, 'drag_drop_upload' => false );
+                            wp_editor( $content, 'posttext', $settings );
+                        ?>
                         <table id="post-status-info" style="">
                         <tbody>
                             <tr>
