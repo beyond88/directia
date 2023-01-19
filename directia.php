@@ -42,6 +42,7 @@ final class Directia {
         error_reporting(E_ALL ^ E_DEPRECATED);
 
         $this->define_constants();
+        $this->load_textdomain();
 
         register_activation_hook( DIRECTIA_FILE, [ $this, 'activate' ] );
 
@@ -76,7 +77,11 @@ final class Directia {
         define( 'DIRECTIA_ASSETS', DIRECTIA_URL . '/assets' );
         define( 'DIRECTIA_BASENAME', plugin_basename( __FILE__ ) );
         define( 'DIRECTIA_LOGIN_RETRY_PAUSE', 5 ); // secs
+    }
 
+    public function load_textdomain()
+    {
+        load_plugin_textdomain('directia', false, dirname(plugin_basename(__FILE__)) . '/languages/');
     }
 
     /**
