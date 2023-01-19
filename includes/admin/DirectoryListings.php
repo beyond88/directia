@@ -285,7 +285,7 @@ class DirectoryListings extends \WP_List_Table {
         $totals = (array) $wpdb->get_results("SELECT status, COUNT( * ) AS total FROM {$table} GROUP BY status", ARRAY_A );
 
         $listing_count = array(
-            'all'               => 0,
+            'all'             => 0,
             'trash'           => 0,
         );
 
