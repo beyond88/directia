@@ -39,4 +39,9 @@ Following the endpoint is responsible to create listing using listing submission
 - One table <strong>(prefix_directia)</strong> will be created when the plugin is activated. 
 
 ## Screenshots
+<a href="https://github.com/beyond88/directia/blob/main/assets/img/listing-table.png" rel="nofollow">Listing table</a></li>
+<a href="https://github.com/beyond88/directia/blob/main/assets/img/listing-form.png" rel="nofollow">Listing block</a></li>
+<a href="https://github.com/beyond88/directia/blob/main/assets/img/listing-details.png" rel="nofollow">Listing details (admin panel)</a></li>
+<a href="https://github.com/beyond88/directia/blob/main/assets/img/grid-view.png" rel="nofollow">Grid view (client area)</a></li>
+<a href="https://github.com/beyond88/directia/blob/main/assets/img/blocks.png" rel="nofollow">Blocks</a></li>
 
