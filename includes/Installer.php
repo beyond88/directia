@@ -82,21 +82,21 @@ class Installer {
             ]
         ];
 
-        $dokan_page_settings = [];
+        $directia_page_settings = [];
 
         if ( $pages ) {
             foreach ( $pages as $page ) {
                 $page_id = $this->createPage( $page );
 
                 if ( $page_id ) {
-                    $dokan_page_settings[ $page['page_id'] ] = $page_id;
+                    $directia_page_settings[ $page['page_id'] ] = $page_id;
 
                     if ( isset( $page['child'] ) && count( $page['child'] ) > 0 ) {
                         foreach ( $page['child'] as $child_page ) {
                             $child_page_id = $this->createPage( $child_page );
 
                             if ( $child_page_id ) {
-                                $dokan_page_settings[ $child_page['page_id'] ] = $child_page_id;
+                                $directia_page_settings[ $child_page['page_id'] ] = $child_page_id;
 
                                 wp_update_post(
                                     [
@@ -111,7 +111,7 @@ class Installer {
             }
         }
 
-        update_option( 'directia_pages', $dokan_page_settings );
+        update_option( 'directia_pages', $directia_page_settings );
         update_option( 'directia_pages_created', true );
     }
 
