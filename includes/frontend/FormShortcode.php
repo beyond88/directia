@@ -11,7 +11,7 @@ class FormShortcode {
      * Initializes the class
      */
     function __construct() {
-        add_shortcode( 'directia_listing_form', [ $this, 'directiaListingForm' ] );
+        add_shortcode( 'directia_listing_form', [ $this, 'directia_listing_form' ] );
     }
 
     /**
@@ -22,7 +22,7 @@ class FormShortcode {
      *
      * @return string
      */
-    public function directiaListingForm( $atts, $content = '' ) {
+    public function directia_listing_form( $atts, $content = '' ) {
         wp_enqueue_script( 'directia-script' );
         wp_enqueue_style( 'directia-style' );
 

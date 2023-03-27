@@ -20,7 +20,7 @@ class Admin {
      *
      * @return void
      */
-    public function dispatchActions() {
+    public function dispatch_actions() {
 
     }
 }

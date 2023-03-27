@@ -17,7 +17,7 @@ class Authentication {
      * Initialize the class
      */
     function __construct() {
-       add_action( 'rest_api_init', [ $this, 'registerApi' ] );
+       add_action( 'rest_api_init', [ $this, 'register_api' ] );
     }
 
     /**
@@ -25,11 +25,11 @@ class Authentication {
      *
      * @return void
      */
-    public function registerApi() {
+    public function register_api() {
 
         register_rest_route( $this->restBase, '/login', [
             'methods'  => WP_REST_SERVER::CREATABLE,
-            'callback' => [ $this, 'tryLogin' ],
+            'callback' => [ $this, 'try_login' ],
             'permission_callback' => '__return_true'
         ]);
 
@@ -40,7 +40,7 @@ class Authentication {
      *
      * @return void
      */
-    public function tryLogin( WP_REST_Request $request ) {
+    public function try_login( WP_REST_Request $request ) {
 
         if (empty( $client_ip_address = $this->directia_client_ip() ) ) {
             die();

@@ -11,8 +11,8 @@ class Assets {
      * Class constructor
      */
     function __construct() {
-        add_action( 'wp_enqueue_scripts', [ $this, 'registerAssets' ] );
-        add_action( 'admin_enqueue_scripts', [ $this, 'registerAssets' ] );
+        add_action( 'wp_enqueue_scripts', [ $this, 'register_assets' ] );
+        add_action( 'admin_enqueue_scripts', [ $this, 'register_assets' ] );
     }
 
     /**
@@ -20,7 +20,7 @@ class Assets {
      *
      * @return array
      */
-    public function getScripts() {
+    public function get_scripts() {
         return [
             'directia-script' => [
                 'src'     => DIRECTIA_ASSETS . '/js/frontend.js',
@@ -42,7 +42,7 @@ class Assets {
      *
      * @return array
      */
-    public function getStyles() {
+    public function get_styles() {
         return [
             'directia-style' => [
                 'src'     => DIRECTIA_ASSETS . '/css/frontend.css',
@@ -60,9 +60,9 @@ class Assets {
      *
      * @return void
      */
-    public function registerAssets() {
-        $scripts = $this->getScripts();
-        $styles  = $this->getStyles();
+    public function register_assets() {
+        $scripts = $this->get_scripts();
+        $styles  = $this->get_styles();
 
         foreach ( $scripts as $handle => $script ) {
             $deps = isset( $script['deps'] ) ? $script['deps'] : false;

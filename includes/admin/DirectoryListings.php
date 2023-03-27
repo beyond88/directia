@@ -124,7 +124,7 @@ class DirectoryListings extends \WP_List_Table {
 
     }
 
-    private function getListingURL( $id ){
+    private function get_listing_url( $id ){
         
         if( $id ){
             $site_url = get_admin_url() . 'admin.php';
@@ -148,7 +148,7 @@ class DirectoryListings extends \WP_List_Table {
     protected function column_default( $item, $column_name ) {
         switch ( $column_name ) {
             case 'title':
-                    return '<strong><a href="'.esc_url($this->getListingURL($item['id'])).'">'.esc_html( $item['title'] ).'</a></strong>';
+                    return '<strong><a href="'.esc_url($this->get_listing_url($item['id'])).'">'.esc_html( $item['title'] ).'</a></strong>';
             case 'content':
                 return esc_html( wp_trim_words( $item['content'], 5) );
             case 'author':

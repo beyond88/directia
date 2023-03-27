@@ -22,7 +22,7 @@ class Listings {
 
         global $wpdb;
         $this->table = $wpdb->prefix . 'directia';
-       add_action( 'rest_api_init', [ $this, 'registerApi' ] );
+       add_action( 'rest_api_init', [ $this, 'register_api' ] );
 
     }
 
@@ -31,17 +31,17 @@ class Listings {
      *
      * @return void
      */
-    public function registerApi() {
+    public function register_api() {
 
         register_rest_route( $this->restBase, '/listings', [
             'methods'  => WP_REST_SERVER::READABLE,
-            'callback' => [ $this, 'getListings' ],
+            'callback' => [ $this, 'get_listings' ],
             'permission_callback' => '__return_true'
         ]);
 
         register_rest_route( $this->restBase, '/create-listing', [
             'methods'  => WP_REST_SERVER::CREATABLE,
-            'callback' => [ $this, 'createListing' ],
+            'callback' => [ $this, 'create_listing' ],
             'permission_callback' => '__return_true'
         ]);
 
@@ -52,7 +52,7 @@ class Listings {
      *
      * @return void
      */
-    public function getListings( WP_REST_Request $request ) {
+    public function get_listings( WP_REST_Request $request ) {
 
         global $wpdb; 
         $listing = [];
@@ -110,7 +110,7 @@ class Listings {
      *
      * @return void
      */
-    public function createListing( WP_REST_Request $request ) {
+    public function create_listing( WP_REST_Request $request ) {
 
         global $wpdb;
         $table = $this->table;

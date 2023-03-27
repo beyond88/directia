@@ -18,7 +18,7 @@ class ListingShortcode {
         global $wpdb;
         $this->table = $wpdb->prefix . 'directia';
 
-        add_shortcode( 'directia_listings', [ $this, 'directiaListings' ] );
+        add_shortcode( 'directia_listings', [ $this, 'directia_listings' ] );
     }
 
     /**
@@ -59,7 +59,7 @@ class ListingShortcode {
      *
      * @return string
      */
-    public function directiaListings( $atts, $content = '' ) {
+    public function directia_listings( $atts, $content = '' ) {
         wp_enqueue_script( 'directia-script' );
         wp_enqueue_style( 'directia-style' );
 

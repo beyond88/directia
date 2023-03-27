@@ -13,15 +13,15 @@ class Installer {
      * @return void
      */
     public function run() {
-        $this->addVersion();
-        $this->createTables();
-        $this->setupPages();
+        $this->add_version();
+        $this->create_tables();
+        $this->setup_pages();
     }
 
     /**
      * Add time and version on DB
      */
-    public function addVersion() {
+    public function add_version() {
         $installed = get_option( 'directia_installed' );
 
         if ( ! $installed ) {
@@ -36,7 +36,7 @@ class Installer {
      *
      * @return void
      */
-    public function createTables() {
+    public function create_tables() {
         global $wpdb;
         // set the default character set and collation for the table
         $charset_collate = $wpdb->get_charset_collate();
@@ -63,7 +63,7 @@ class Installer {
      *
      * @return void
      */
-    public function setupPages() {
+    public function setup_pages() {
         $meta_key = '_wp_page_template';
 
         // return if pages were created before
@@ -86,14 +86,14 @@ class Installer {
 
         if ( $pages ) {
             foreach ( $pages as $page ) {
-                $page_id = $this->createPage( $page );
+                $page_id = $this->create_page( $page );
 
                 if ( $page_id ) {
                     $directia_page_settings[ $page['page_id'] ] = $page_id;
 
                     if ( isset( $page['child'] ) && count( $page['child'] ) > 0 ) {
                         foreach ( $page['child'] as $child_page ) {
-                            $child_page_id = $this->createPage( $child_page );
+                            $child_page_id = $this->create_page( $child_page );
 
                             if ( $child_page_id ) {
                                 $directia_page_settings[ $child_page['page_id'] ] = $child_page_id;
@@ -120,7 +120,7 @@ class Installer {
      *
      * @return void
      */
-    public function createPage( $page ) {
+    public function create_page( $page ) {
         $meta_key = '_wp_page_template';
         $page_obj = get_page_by_path( $page['post_title'] );
 
